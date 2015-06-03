@@ -34,7 +34,7 @@ let(:base_title) { "Ruby on Rails Tutorial Sample App" }
   	it "Should have the title 'Help'" do
       visit '/static_pages/help'
       page.should have_selector('title', 
-      						:text => "#{base_title} | Help")
+      						:text => "Help")
     end
   end
 
@@ -49,7 +49,7 @@ let(:base_title) { "Ruby on Rails Tutorial Sample App" }
   	it "Should have the title 'About us'" do
       visit '/static_pages/about'
       page.should have_selector('title', 
-      						:text => "#{base_title} | About us")
+      						:text => "About us")
   	end
   end
 
@@ -64,7 +64,7 @@ let(:base_title) { "Ruby on Rails Tutorial Sample App" }
   	it "Should have the title 'Contact'" do
   		visit '/static_pages/contact'
   		page.should have_selector('title', 
-      						:text => "#{base_title} | Contact")
+      						:text => "Contact")
   	end
   end	
 end
