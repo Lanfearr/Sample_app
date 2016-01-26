@@ -33,6 +33,36 @@ describe "StaticPages" do
           page.should have_selector("li##{item.id}", text: item.content)
         end
       end
+
+      describe "follower/following counts" do
+        let(:other_user) { FactoryGirl.create(:user) }
+        before do
+          other_user.follow!(user)
+          visit root_path
+        end
+
+        it { should have_link("0 following", href: following_user_path(user)) }
+        it { should have_link("1 follower", href: followers_user_path(user)) }
+      end
+
+      describe "should have micropost count" do
+        it { should have_selector('span', text: "2 microposts") }
+
+        describe "with correct pluralization" do
+          before { click_link "delete" }
+
+          it { should have_selector('span', text: "1 micropost") }
+        end
+      end
+
+      describe "pagination" do
+        before do
+          50.times { FactoryGirl.create(:micropost, user: user, content: "pagination test") }
+          visit root_path
+        end
+
+        it { should have_selector('div.pagination') }
+      end
     end
   end
 
